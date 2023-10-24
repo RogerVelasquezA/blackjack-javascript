@@ -2,6 +2,14 @@ let deck = [];
 let tipos = ['C','D','H','S']
 let especiales = ['A','K','Q','J']
 
+let puntosJugador = 0;
+let puntosComputadora = 0;
+
+
+const btnPedir = document.querySelector('#btnPedir');
+const puntosHTML = document.querySelectorAll('small');
+
+
 const crearDeck = () =>{
     for(let i= 2; i<=10;i++){
         for(let tip of tipos){
@@ -23,17 +31,15 @@ crearDeck();
 
 //Funcion para pedir una carta
 
-const tomarCarta = () =>{
+const pedirCarta = () =>{
     if(deck.length === 0){
         throw "No hay Cartas";
     }
 
-    let cartaTomada;
+    const cartaTomada= deck.pop();
 
-    cartaTomada = deck.pop();
-
-    console.log(cartaTomada);
-    console.log(deck);
+    //console.log(cartaTomada);
+    //console.log(deck);
     return cartaTomada;
 }
 
@@ -51,9 +57,20 @@ const valorCarta = (carta) => {
         
     // }
     // console.log(puntos*1)
-
 }
 
-let valor = valorCarta(tomarCarta())
+let valor = valorCarta(pedirCarta());
 
-console.log({valor})
+//console.log(valor)
+//Eventos
+btnPedir.addEventListener('click',() =>{
+    const carta = pedirCarta(); 
+
+    puntosJugador += valorCarta(carta); 
+    console.log(puntosJugador)
+    puntosHTML[0].innerText = puntosJugador; 
+
+    
+
+})
+
